@@ -5,6 +5,17 @@
 
     RewriteEngine On
 
+        # CORS headers for React frontend
+    <IfModule mod_headers.c>
+        Header always set Access-Control-Allow-Origin "http://localhost:5173"
+        Header always set Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+        Header always set Access-Control-Allow-Headers "Content-Type, Authorization"
+    </IfModule>
+
+    # Allow CORS preflight requests
+    RewriteCond %{REQUEST_METHOD} OPTIONS
+    RewriteRule ^ - [R=204,L]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
