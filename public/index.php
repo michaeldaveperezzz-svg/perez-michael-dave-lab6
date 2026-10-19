@@ -1,3 +1,4 @@
+```php
 <?php
 define('PREVENT_DIRECT_ACCESS', TRUE);
 
@@ -12,6 +13,7 @@ if ($origin === $allowedOrigin) {
     header('Access-Control-Allow-Headers: Content-Type, Authorization');
 }
 
+// Handle browser CORS preflight requests
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     if ($origin !== $allowedOrigin) {
         http_response_code(403);
@@ -21,3 +23,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(204);
     exit;
 }
+
+/*
+ * LavaLust system directory
+ */
+$system_path = 'scheme';
+
+/*
+ * Application directory
+ */
+$application_folder = 'app';
+
+/*
+ * Public directory
+ */
+$public_folder = 'public';
+
+/*
+ * Define application constants
+ */
+define('ROOT_DIR', dirname(__DIR__) . DIRECTORY_SEPARATOR);
+define('SYSTEM_DIR', ROOT_DIR . $system_path . DIRECTORY_SEPARATOR);
+define('APP_DIR', ROOT_DIR . $application_folder . DIRECTORY_SEPARATOR);
+define('PUBLIC_DIR', $public_folder);
+
+/*
+ * Load LavaLust framework
+ */
+require_once SYSTEM_DIR . 'kernel/LavaLust.php';
