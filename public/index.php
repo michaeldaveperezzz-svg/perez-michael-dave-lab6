@@ -1,4 +1,3 @@
-```php
 <?php
 define('PREVENT_DIRECT_ACCESS', TRUE);
 
